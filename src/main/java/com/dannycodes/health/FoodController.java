@@ -31,5 +31,9 @@ public class FoodController {
     public Map<String, Object> checkCombination(@RequestBody FoodChecker foodChecker) {
        return foodService.checkCombination(foodChecker);
     }
+    @DeleteMapping("/delete/{id}")
+    public String deleteFood(@PathVariable Long id ) {
+       return foodService.deleteFood(id);
+    }
 
 }
