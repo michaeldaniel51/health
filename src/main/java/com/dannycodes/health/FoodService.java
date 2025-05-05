@@ -37,5 +37,11 @@ public class FoodService {
         return result;
     }
 
+    public String deleteFood(Long id) {
+        Food food = foodRepo.findById(id).orElseThrow();
+         foodRepo.deleteById(id);
+        return food.getName() + " Was Deleted Successfully";
+    }
+
 
 }
