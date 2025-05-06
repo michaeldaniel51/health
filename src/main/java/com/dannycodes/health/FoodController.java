@@ -8,7 +8,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/food")
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FoodController {
 
     private final FoodService foodService;
@@ -26,6 +26,10 @@ public class FoodController {
     public Food addFood(@RequestBody Food food) {
         return foodService.addFood(food);
     }
+    @PutMapping("/edit/{id}")
+    public Food updateFood(@PathVariable Long id,@RequestBody Food updatedFood) {
+        return foodService.updateFood(id,updatedFood);
+    }
 
     @PostMapping("/combinations")
     public Map<String, Object> checkCombination(@RequestBody FoodChecker foodChecker) {
@@ -34,6 +38,10 @@ public class FoodController {
     @DeleteMapping("/delete/{id}")
     public String deleteFood(@PathVariable Long id ) {
        return foodService.deleteFood(id);
+    }
+    @GetMapping("/single/{id}")
+    public Food getFoodById(@PathVariable Long id ) {
+       return foodService.getFoodById(id);
     }
 
 }

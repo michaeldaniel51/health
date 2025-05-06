@@ -26,6 +26,19 @@ public class FoodService {
         return foodRepo.save(food);
     }
 
+    public Food updateFood(Long id,Food updatedFood) {
+        return foodRepo.findById(id).map(existingFood -> {
+            existingFood.setName(updatedFood.getName());
+            existingFood.setCalories(updatedFood.getCalories());
+            // Add other fields as necessary
+            return foodRepo.save(existingFood);
+        }).orElseThrow(() -> new GeneralException("Food not found with id " + id));
+    }
+
+     public Food getFoodById(Long id) {
+        return foodRepo.findById(id).orElseThrow(() -> new GeneralException("Food not found"));
+    }
+
     public Map<String, Object> checkCombination(FoodChecker foodChecker) {
         List<Food> foods = foodRepo.findAllById(foodChecker.getFoodIds());
         int totalCalories = foods.stream()
