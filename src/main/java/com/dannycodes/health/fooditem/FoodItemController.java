@@ -29,4 +29,9 @@ public class FoodItemController {
         return ResponseEntity.ok(foodItemService.getFoodItemById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteFoodById(@PathVariable Long id) {
+        return ResponseEntity.ok(foodItemService.deleteFoodItem(id));
+    }
+
 }

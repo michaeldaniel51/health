@@ -24,8 +24,10 @@ public class FoodItemService {
         return foodItemRepository.save(foodItem);
     }
 
-    public void deleteFoodItem(Long id) {
+    public String deleteFoodItem(Long id) {
+        Optional<FoodItem> foodItem = getFoodItemById(id);
         foodItemRepository.deleteById(id);
+       return foodItem.get().getName() +" is deleted Successfully";
     }
 
 
