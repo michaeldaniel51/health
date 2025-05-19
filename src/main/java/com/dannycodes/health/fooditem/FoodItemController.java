@@ -33,5 +33,9 @@ public class FoodItemController {
     public ResponseEntity<String> deleteFoodById(@PathVariable Long id) {
         return ResponseEntity.ok(foodItemService.deleteFoodItem(id));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<FoodItem> updateFoodItemById(@PathVariable Long id,@RequestBody FoodItem foodItem) {
+        return ResponseEntity.ok(foodItemService.updateFoodItem(id,foodItem));
+    }
 
 }
