@@ -1,5 +1,7 @@
 package com.dannycodes.health.fooditem;
 
+import com.dannycodes.health.Food;
+import com.dannycodes.health.GeneralException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,20 @@ public class FoodItemService {
         Optional<FoodItem> foodItem = getFoodItemById(id);
         foodItemRepository.deleteById(id);
        return foodItem.get().getName() +" is deleted Successfully";
+    }
+
+
+    public FoodItem updateFoodItem(Long id, FoodItem updatedFoodItem) {
+        return foodItemRepository.findById(id).map(existingFood -> {
+            existingFood.setName(updatedFoodItem.getName());
+            existingFood.setCalories(updatedFoodItem.getCalories());
+            existingFood.setCarbs(updatedFoodItem.getCarbs());
+            existingFood.setProtein(updatedFoodItem.getProtein());
+            existingFood.setFat(updatedFoodItem.getFat());
+            existingFood.setSugar(updatedFoodItem.getSugar());
+            // Add other fields as necessary
+            return foodItemRepository.save(existingFood);
+        }).orElseThrow(() -> new GeneralException("FoodItem not found with id " + id));
     }
 
 
